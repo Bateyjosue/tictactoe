@@ -55,6 +55,18 @@ export default function RootLayout({
         <link rel="apple-touch-icon" href="/jb-logo.svg" />
         <meta name="theme-color" content="#3B82F6" />
         <meta name="color-scheme" content="light dark" />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  var theme = localStorage.getItem('theme') || 'light';
+                  document.documentElement.classList.toggle('dark', theme === 'dark');
+                } catch (e) {}
+              })();
+            `,
+          }}
+        />
       </head>
       <body className="antialiased">
         {children}
