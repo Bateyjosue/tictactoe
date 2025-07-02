@@ -70,6 +70,21 @@ export default function SettingsModal({
               Apply Settings
             </button>
           </div>
+          
+          {/* Developer Credit */}
+          <div className="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700 text-center">
+            <p className="text-xs text-gray-500 dark:text-gray-400">
+              Made with ❤️ by{" "}
+              <a 
+                href="https://josuebatey.vercel.app/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="font-semibold text-blue-600 dark:text-blue-400 hover:underline transition-colors"
+              >
+                Josue Batey
+              </a>
+            </p>
+          </div>
         </div>
       </div>
     </div>

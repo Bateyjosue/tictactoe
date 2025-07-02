@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none">
+  <!-- Background circle -->
+  <circle cx="50" cy="50" r="45" fill="url(#gradient)" stroke="url(#strokeGradient)" stroke-width="2"/>
+  
+  <!-- J letter -->
+  <path d="M25 25h8v35c0 5 2 8.5 5.5 10.5S45 72 50 72s6.5-1.5 9.5-3.5S65 65 65 60V25h8v35c0 7-2.5 12.5-7.5 16.5S58 80 50 80s-10.5-2.5-15.5-6.5S25 67 25 60V25z" fill="white"/>
+  
+  <!-- B letter -->
+  <path d="M45 25h20c3 0 5.5 1 7.5 3s3 4.5 3 7.5-1 5.5-3 7.5-4.5 3-7.5 3h-8v15h-8V25zm8 8v12h12c1.5 0 2.5-.5 3-1.5s.5-2.5.5-4.5-.2-3-.5-4.5-1.5-1.5-3-1.5h-12z" fill="white"/>
+  
+  <!-- Gradients -->
+  <defs>
+    <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#3B82F6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#8B5CF6;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="strokeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1E40AF;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#7C3AED;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+</svg> 

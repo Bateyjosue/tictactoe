@@ -1,4 +1,4 @@
-# Emoji Tic Tac Toe
+# Tic Tac Toe
 
 A fun, emoji-based Tic Tac Toe game built with React 19, Next.js 14 (App Router), and TailwindCSS. Play as your favorite animal and fruit combo on a dynamic grid. Supports light/dark mode, mobile-first design, and is ready for Vercel deployment.
 
