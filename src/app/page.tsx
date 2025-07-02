@@ -18,7 +18,7 @@ export default function HomePage() {
   return (
     <main className="h-screen bg-gradient-to-br from-green-100 via-yellow-50 to-blue-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 transition-colors overflow-hidden">
       {/* Header Controls */}
-      <div className="fixed top-0 left-0 right-0 z-50 flex justify-between items-center p-3 bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm border-b border-gray-200 dark:border-gray-700">
+      <div className="lg:zoom-[120%] lg:pl-100 lg:pr-100 fixed top-0 left-0 right-0 z-50 flex justify-between items-center p-3 bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm border-b border-gray-200 dark:border-gray-700">
         <div className="flex items-center space-x-3">
           <div className="flex items-center space-x-2">
             <img 
@@ -48,8 +48,8 @@ export default function HomePage() {
         </div>
       </div>
 
-      {/* Desktop Wrapper */}
-      <div className="h-full pt-16 px-3 flex justify-center">
+      {/* Desktop Wrapper with 10% spacing */}
+      <div className="h-full pt-16 px-3 md:px-[10%] flex justify-center">
         <div className="w-full max-w-6xl h-full flex flex-col items-center justify-center">
           {/* Game Status */}
           <div className="w-full max-w-lg mb-4 text-center">
