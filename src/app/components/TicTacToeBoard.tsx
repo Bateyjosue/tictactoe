@@ -92,55 +92,100 @@ export default function TicTacToeBoard({ size, player1, player2, onReset }: TicT
     onReset();
   }
 
+  // Calculate responsive cell sizes
+  const getCellSize = () => {
+    if (size <= 3) return "w-20 h-20 md:w-24 md:h-24 lg:w-28 lg:h-28";
+    if (size <= 4) return "w-16 h-16 md:w-20 md:h-20 lg:w-24 lg:h-24";
+    if (size <= 5) return "w-14 h-14 md:w-18 md:h-18 lg:w-22 lg:h-22";
+    return "w-12 h-12 md:w-16 md:h-16 lg:w-20 lg:h-20";
+  };
+
+  const getEmojiSize = () => {
+    if (size <= 3) return "text-3xl md:text-4xl lg:text-5xl";
+    if (size <= 4) return "text-2xl md:text-3xl lg:text-4xl";
+    if (size <= 5) return "text-xl md:text-2xl lg:text-3xl";
+    return "text-lg md:text-xl lg:text-2xl";
+  };
+
   return (
-    <div className="flex flex-col items-center">
-      <div className="mb-2 text-lg font-semibold">
+    <div className="flex flex-col items-center space-y-6">
+      {/* Game Status */}
+      <div className="bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm rounded-2xl p-6 shadow-xl border border-gray-200 dark:border-gray-700 min-w-[300px]">
         {winner ? (
-          <span>
-            Winner: <span className="text-2xl">{winner.player === 1 ? player1.emoji : player2.emoji}</span>
-          </span>
+          <div className="text-center">
+            <div className="text-2xl md:text-3xl font-bold text-green-600 dark:text-green-400 mb-2">
+              🎉 Winner! 🎉
+            </div>
+            <div className="text-4xl md:text-5xl mb-2">
+              {winner.player === 1 ? player1.emoji : player2.emoji}
+            </div>
+            <div className="text-lg text-gray-600 dark:text-gray-400">
+              {winner.player === 1 ? "Player 1" : "Player 2"} wins!
+            </div>
+          </div>
         ) : draw ? (
-          <span>Draw! No more moves.</span>
+          <div className="text-center">
+            <div className="text-2xl md:text-3xl font-bold text-gray-600 dark:text-gray-400 mb-2">
+              🤝 It&apos;s a Draw! 🤝
+            </div>
+            <div className="text-lg text-gray-500 dark:text-gray-500">
+              No more moves available
+            </div>
+          </div>
         ) : (
-          <span>
-            Turn: <span className="text-2xl">{turn === 1 ? player1.emoji : player2.emoji}</span>
-          </span>
+          <div className="text-center">
+            <div className="text-lg text-gray-600 dark:text-gray-400 mb-2">Current Turn</div>
+            <div className="text-4xl md:text-5xl mb-2">
+              {turn === 1 ? player1.emoji : player2.emoji}
+            </div>
+            <div className="text-lg font-semibold text-gray-700 dark:text-gray-300">
+              {turn === 1 ? "Player 1" : "Player 2"}
+            </div>
+          </div>
         )}
       </div>
-      <div
-        className="grid bg-gray-200 dark:bg-gray-700 rounded-xl shadow-lg"
-        style={{
-          gridTemplateColumns: `repeat(${size}, minmax(48px, 64px))`,
-          gridTemplateRows: `repeat(${size}, minmax(48px, 64px))`,
-        }}
-      >
-        {board.map((row, i) =>
-          row.map((cell, j) => (
-            <button
-              key={i + "-" + j}
-              className={`w-16 h-16 md:w-20 md:h-20 flex items-center justify-center text-3xl md:text-4xl border-2 border-gray-400 dark:border-gray-600 transition-all duration-150
-                ${cell ? "cursor-default" : "hover:bg-blue-100 dark:hover:bg-blue-900"}
-                ${isWinningCell(i, j) ? "bg-green-200 dark:bg-green-800 animate-pulse" : ""}
-                ${winner || draw ? "opacity-70" : ""}
-              `}
-              onClick={() => handleCellClick(i, j)}
-              disabled={!!cell || !!winner || draw}
-              aria-label={`Cell ${i + 1},${j + 1}`}
-            >
-              {cell === 1 ? (
-                <span>{player1.emoji}</span>
-              ) : cell === 2 ? (
-                <span>{player2.emoji}</span>
-              ) : null}
-            </button>
-          ))
-        )}
+
+      {/* Game Board */}
+      <div className="bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm rounded-3xl p-6 shadow-2xl border border-gray-200 dark:border-gray-700">
+        <div
+          className="grid bg-gray-200 dark:bg-gray-700 rounded-2xl shadow-inner overflow-hidden"
+          style={{
+            gridTemplateColumns: `repeat(${size}, 1fr)`,
+            gridTemplateRows: `repeat(${size}, 1fr)`,
+            gap: "2px",
+            padding: "2px",
+          }}
+        >
+          {board.map((row, i) =>
+            row.map((cell, j) => (
+              <button
+                key={i + "-" + j}
+                className={`${getCellSize()} flex items-center justify-center ${getEmojiSize()} bg-white dark:bg-gray-800 border-0 transition-all duration-200
+                  ${cell ? "cursor-default" : "hover:bg-blue-50 dark:hover:bg-blue-900/30 active:scale-95"}
+                  ${isWinningCell(i, j) ? "bg-green-200 dark:bg-green-800 animate-pulse shadow-lg" : ""}
+                  ${winner || draw ? "opacity-80" : ""}
+                `}
+                onClick={() => handleCellClick(i, j)}
+                disabled={!!cell || !!winner || draw}
+                aria-label={`Cell ${i + 1},${j + 1}`}
+              >
+                {cell === 1 ? (
+                  <span className="drop-shadow-sm">{player1.emoji}</span>
+                ) : cell === 2 ? (
+                  <span className="drop-shadow-sm">{player2.emoji}</span>
+                ) : null}
+              </button>
+            ))
+          )}
+        </div>
       </div>
+
+      {/* Reset Button */}
       <button
-        className="mt-4 px-6 py-2 rounded-lg bg-blue-500 text-white font-bold shadow hover:bg-blue-600 transition-all"
+        className="px-8 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-bold rounded-xl shadow-lg hover:from-blue-600 hover:to-purple-700 transition-all duration-200 transform hover:scale-105 active:scale-95"
         onClick={handleReset}
       >
-        Reset Game
+        🔄 New Game
       </button>
     </div>
   );

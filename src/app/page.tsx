@@ -16,33 +16,55 @@ export default function HomePage() {
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
 
   return (
-    <main className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-green-100 via-yellow-50 to-blue-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 transition-colors">
-      <ThemeToggle />
-      <button
-        onClick={() => setIsSettingsOpen(true)}
-        className="fixed top-4 right-16 z-50 p-2 rounded-full border-2 border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 shadow-md text-xl transition-all hover:bg-gray-50 dark:hover:bg-gray-800"
-        aria-label="Open settings"
-      >
-        ⚙️
-      </button>
-      
-      <div className="w-full max-w-md mx-auto p-4 md:p-8 flex flex-col items-center">
-        <h1 className="text-3xl md:text-4xl font-extrabold mb-2 text-center">Emoji Tic Tac Toe</h1>
-        <p className="mb-4 text-center text-gray-700 dark:text-gray-300 text-base md:text-lg">
-          Animal vs Fruit! Choose your emoji and grid size in settings.<br />
-          Tap a cell to make your move. First to complete a row, column, or diagonal wins.
-        </p>
-        
-        <div className="mb-4 text-center">
-          <div className="text-2xl mb-2">
-            <span className="mr-4">{player1.emoji} vs {player2.emoji}</span>
-          </div>
-          <div className="text-sm text-gray-600 dark:text-gray-400">
-            {gridSize} x {gridSize} Grid
+    <main className="min-h-screen bg-gradient-to-br from-green-100 via-yellow-50 to-blue-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 transition-colors">
+      {/* Header Controls */}
+      <div className="fixed top-0 left-0 right-0 z-50 flex justify-between items-center p-4 bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm border-b border-gray-200 dark:border-gray-700">
+        <div className="flex items-center space-x-4">
+          <h1 className="text-xl md:text-2xl font-bold text-gray-800 dark:text-white">
+            Emoji Tic Tac Toe
+          </h1>
+          <div className="hidden sm:flex items-center space-x-2 text-sm text-gray-600 dark:text-gray-300">
+            <span>{player1.emoji} vs {player2.emoji}</span>
+            <span>•</span>
+            <span>{gridSize}×{gridSize}</span>
           </div>
         </div>
-        
-        <div className="w-full flex flex-col items-center">
+        <div className="flex items-center space-x-2">
+          <button
+            onClick={() => setIsSettingsOpen(true)}
+            className="p-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 shadow-sm text-lg transition-all hover:bg-gray-50 dark:hover:bg-gray-700"
+            aria-label="Open settings"
+          >
+            ⚙️
+          </button>
+          <ThemeToggle />
+        </div>
+      </div>
+
+      {/* Main Game Area */}
+      <div className="pt-20 pb-8 px-4 min-h-screen flex flex-col items-center justify-center">
+        {/* Game Status */}
+        <div className="w-full max-w-2xl mb-8 text-center">
+          <div className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-gray-200 dark:border-gray-700">
+            <div className="flex flex-col sm:flex-row items-center justify-center space-y-2 sm:space-y-0 sm:space-x-8">
+              <div className="flex items-center space-x-4">
+                <div className="text-3xl md:text-4xl">{player1.emoji}</div>
+                <div className="text-lg md:text-xl font-semibold text-gray-700 dark:text-gray-300">Player 1</div>
+              </div>
+              <div className="text-2xl font-bold text-gray-500">VS</div>
+              <div className="flex items-center space-x-4">
+                <div className="text-lg md:text-xl font-semibold text-gray-700 dark:text-gray-300">Player 2</div>
+                <div className="text-3xl md:text-4xl">{player2.emoji}</div>
+              </div>
+            </div>
+            <div className="mt-4 text-sm text-gray-600 dark:text-gray-400">
+              Grid Size: {gridSize} × {gridSize}
+            </div>
+          </div>
+        </div>
+
+        {/* Game Board - Main Focus */}
+        <div className="w-full max-w-4xl flex justify-center">
           <TicTacToeBoard
             key={`${gridSize}-${player1.emoji}-${player2.emoji}-${gameKey}`}
             size={gridSize}
@@ -50,6 +72,15 @@ export default function HomePage() {
             player2={player2}
             onReset={() => setGameKey((k) => k + 1)}
           />
+        </div>
+
+        {/* Instructions */}
+        <div className="w-full max-w-2xl mt-8 text-center">
+          <div className="bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm rounded-xl p-4 shadow-sm border border-gray-200 dark:border-gray-700">
+            <p className="text-sm text-gray-600 dark:text-gray-400">
+              Tap any cell to make your move. First to complete a row, column, or diagonal wins!
+            </p>
+          </div>
         </div>
       </div>
       
