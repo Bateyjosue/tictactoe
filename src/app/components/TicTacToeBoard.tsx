@@ -92,53 +92,53 @@ export default function TicTacToeBoard({ size, player1, player2, onReset }: TicT
     onReset();
   }
 
-  // Calculate responsive cell sizes
+  // Calculate responsive cell sizes - more compact
   const getCellSize = () => {
-    if (size <= 3) return "w-20 h-20 md:w-24 md:h-24 lg:w-28 lg:h-28";
-    if (size <= 4) return "w-16 h-16 md:w-20 md:h-20 lg:w-24 lg:h-24";
-    if (size <= 5) return "w-14 h-14 md:w-18 md:h-18 lg:w-22 lg:h-22";
-    return "w-12 h-12 md:w-16 md:h-16 lg:w-20 lg:h-20";
+    if (size <= 3) return "w-16 h-16 md:w-20 md:h-20 lg:w-24 lg:h-24";
+    if (size <= 4) return "w-14 h-14 md:w-18 md:h-18 lg:w-22 lg:h-22";
+    if (size <= 5) return "w-12 h-12 md:w-16 md:h-16 lg:w-20 lg:h-20";
+    return "w-10 h-10 md:w-14 md:h-14 lg:w-18 lg:h-18";
   };
 
   const getEmojiSize = () => {
-    if (size <= 3) return "text-3xl md:text-4xl lg:text-5xl";
-    if (size <= 4) return "text-2xl md:text-3xl lg:text-4xl";
-    if (size <= 5) return "text-xl md:text-2xl lg:text-3xl";
-    return "text-lg md:text-xl lg:text-2xl";
+    if (size <= 3) return "text-2xl md:text-3xl lg:text-4xl";
+    if (size <= 4) return "text-xl md:text-2xl lg:text-3xl";
+    if (size <= 5) return "text-lg md:text-xl lg:text-2xl";
+    return "text-base md:text-lg lg:text-xl";
   };
 
   return (
-    <div className="flex flex-col items-center space-y-6">
+    <div className="flex flex-col items-center space-y-4 h-full justify-center">
       {/* Game Status */}
-      <div className="bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm rounded-2xl p-6 shadow-xl border border-gray-200 dark:border-gray-700 min-w-[300px]">
+      <div className="bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm rounded-xl p-4 shadow-xl border border-gray-200 dark:border-gray-700 min-w-[280px]">
         {winner ? (
           <div className="text-center">
-            <div className="text-2xl md:text-3xl font-bold text-green-600 dark:text-green-400 mb-2">
+            <div className="text-xl md:text-2xl font-bold text-green-600 dark:text-green-400 mb-1">
               🎉 Winner! 🎉
             </div>
-            <div className="text-4xl md:text-5xl mb-2">
+            <div className="text-3xl md:text-4xl mb-1">
               {winner.player === 1 ? player1.emoji : player2.emoji}
             </div>
-            <div className="text-lg text-gray-600 dark:text-gray-400">
+            <div className="text-sm text-gray-600 dark:text-gray-400">
               {winner.player === 1 ? "Player 1" : "Player 2"} wins!
             </div>
           </div>
         ) : draw ? (
           <div className="text-center">
-            <div className="text-2xl md:text-3xl font-bold text-gray-600 dark:text-gray-400 mb-2">
+            <div className="text-xl md:text-2xl font-bold text-gray-600 dark:text-gray-400 mb-1">
               🤝 It&apos;s a Draw! 🤝
             </div>
-            <div className="text-lg text-gray-500 dark:text-gray-500">
+            <div className="text-sm text-gray-500 dark:text-gray-500">
               No more moves available
             </div>
           </div>
         ) : (
           <div className="text-center">
-            <div className="text-lg text-gray-600 dark:text-gray-400 mb-2">Current Turn</div>
-            <div className="text-4xl md:text-5xl mb-2">
+            <div className="text-sm text-gray-600 dark:text-gray-400 mb-1">Current Turn</div>
+            <div className="text-3xl md:text-4xl mb-1">
               {turn === 1 ? player1.emoji : player2.emoji}
             </div>
-            <div className="text-lg font-semibold text-gray-700 dark:text-gray-300">
+            <div className="text-sm font-semibold text-gray-700 dark:text-gray-300">
               {turn === 1 ? "Player 1" : "Player 2"}
             </div>
           </div>
@@ -146,9 +146,9 @@ export default function TicTacToeBoard({ size, player1, player2, onReset }: TicT
       </div>
 
       {/* Game Board */}
-      <div className="bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm rounded-3xl p-6 shadow-2xl border border-gray-200 dark:border-gray-700">
+      <div className="bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm rounded-2xl p-4 shadow-2xl border border-gray-200 dark:border-gray-700">
         <div
-          className="grid bg-gray-200 dark:bg-gray-700 rounded-2xl shadow-inner overflow-hidden"
+          className="grid bg-gray-200 dark:bg-gray-700 rounded-xl shadow-inner overflow-hidden"
           style={{
             gridTemplateColumns: `repeat(${size}, 1fr)`,
             gridTemplateRows: `repeat(${size}, 1fr)`,
@@ -182,7 +182,7 @@ export default function TicTacToeBoard({ size, player1, player2, onReset }: TicT
 
       {/* Reset Button */}
       <button
-        className="px-8 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-bold rounded-xl shadow-lg hover:from-blue-600 hover:to-purple-700 transition-all duration-200 transform hover:scale-105 active:scale-95"
+        className="px-6 py-2 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-bold rounded-lg shadow-lg hover:from-blue-600 hover:to-purple-700 transition-all duration-200 transform hover:scale-105 active:scale-95 text-sm"
         onClick={handleReset}
       >
         🔄 New Game
