@@ -1,11 +1,11 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import type { EmojiCombo } from "./EmojiSelector";
+import type { Animal, Fruit } from "./EmojiSelector";
 
 interface TicTacToeBoardProps {
   size: number;
-  player1: EmojiCombo;
-  player2: EmojiCombo;
+  player1: Animal;
+  player2: Fruit;
   onReset: () => void;
 }
 
@@ -97,13 +97,13 @@ export default function TicTacToeBoard({ size, player1, player2, onReset }: TicT
       <div className="mb-2 text-lg font-semibold">
         {winner ? (
           <span>
-            Winner: <span className="text-2xl">{winner.player === 1 ? player1.animal + player1.fruit : player2.animal + player2.fruit}</span>
+            Winner: <span className="text-2xl">{winner.player === 1 ? player1.emoji : player2.emoji}</span>
           </span>
         ) : draw ? (
           <span>Draw! No more moves.</span>
         ) : (
           <span>
-            Turn: <span className="text-2xl">{turn === 1 ? player1.animal + player1.fruit : player2.animal + player2.fruit}</span>
+            Turn: <span className="text-2xl">{turn === 1 ? player1.emoji : player2.emoji}</span>
           </span>
         )}
       </div>
@@ -128,9 +128,9 @@ export default function TicTacToeBoard({ size, player1, player2, onReset }: TicT
               aria-label={`Cell ${i + 1},${j + 1}`}
             >
               {cell === 1 ? (
-                <span>{player1.animal}{player1.fruit}</span>
+                <span>{player1.emoji}</span>
               ) : cell === 2 ? (
-                <span>{player2.animal}{player2.fruit}</span>
+                <span>{player2.emoji}</span>
               ) : null}
             </button>
           ))
